@@ -10,6 +10,11 @@ import api from './api';
 import logger from './logger';
 import app from './app';
 
+if (app.get('env') === 'development') {
+  // run livereload and webpack dev server
+  require('../../webpack-devserver');
+}
+
 // register apis
 app.use('/api', api);
 
