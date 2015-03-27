@@ -10,16 +10,18 @@ import api from './api';
 import logger from './logger';
 import app from './app';
 
-let jsBundle = 'http://0.0.0.0:3002/build/bundle.js';
+let js = 'http://0.0.0.0:3002/build/bundle.js';
+let css = 'http://0.0.0.0:3002/build/main.css';
 
 if (app.get('env') === 'development') {
-  // run livereload and webpack dev server
-  require('../../webpack-devserver');
+  // run webpack dev server
+  require('../../dev-tools');
 }
 
 if (app.get('env') === 'production') {
   let webpackBuildStats = require('../../public/build/webpackBuildStats');
-  jsBundle = `/build/${webpackBuildStats.assetsByChunkName.js}`; // jscs:disable
+  js = `/build/bundle-${webpackBuildStats.hash}.min.js`; // jscs:disable
+  css = `/build/main-${webpackBuildStats.hash}.min.css`; // jscs:disable
 }
 
 // register apis
@@ -28,7 +30,8 @@ app.use('/api', api);
 // react-router will take care of the rest
 app.use('*', (req, res) => {
   res.render('index', {
-    jsBundle: jsBundle
+    js: js,
+    css: css
   });
 });
 

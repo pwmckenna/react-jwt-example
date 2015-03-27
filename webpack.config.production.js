@@ -3,13 +3,14 @@
 var path = require('path');
 var webpack = require('webpack');
 var StatsPlugin = require('stats-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var rimraf = require('rimraf');
 rimraf.sync('public/build');
 
 module.exports = {
-  entry: {
-    'js': './src/client/app.js'
-  },
+  entry: [
+    './src/client/app.js'
+  ],
   output: {
     path: path.join(__dirname, '/public/build/'),
     filename: 'bundle-[hash].min.js'
@@ -22,6 +23,9 @@ module.exports = {
       test: /\.js?$/,
       exclude: /node_modules/,
       loader: 'babel'
+    }, {
+      test: /\.styl$/,
+      loader: ExtractTextPlugin.extract("css-loader!stylus-loader")
     }]
   },
   plugins: [
@@ -30,6 +34,7 @@ module.exports = {
         source: false,
         modules: false
       }
-    )
+    ),
+    new ExtractTextPlugin("main-[hash].min.css")
   ]
 };

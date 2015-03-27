@@ -1,3 +1,5 @@
 'use strict';
 
-console.log('HELLO');
+require('../../styl/main.styl');
+
+console.log('aaaa');
