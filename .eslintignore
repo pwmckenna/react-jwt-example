@@ -1,2 +1,2 @@
-webpack.config.development.js
+webpack.config.*.js
 webpack-devserver.js

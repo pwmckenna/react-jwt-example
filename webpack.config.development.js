@@ -4,6 +4,8 @@ var path = require('path');
 var webpack = require('webpack');
 var address = require('network-address')();
 var hotPort = 3002;
+var rimraf = require('rimraf');
+rimraf.sync('public/build');
 
 module.exports = {
   devtool: 'eval',
