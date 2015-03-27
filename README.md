@@ -2,7 +2,7 @@
 
 React.js and JSON Web Token integration in isomorphic applications
 
-### VERY MUCH KORK IN PROGRESS
+### VERY MUCH WORK IN PROGRESS
 
 ## Technologies
 * React

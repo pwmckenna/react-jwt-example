@@ -2,4 +2,4 @@
 
 require('../../styl/main.styl');
 
-console.log('aaaa');
+console.log('cazzsdajsdkamskdjklas');
