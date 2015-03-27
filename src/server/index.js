@@ -35,6 +35,16 @@ app.use('*', (req, res) => {
   });
 });
 
+app.use((err, req, res, next) => {/* eslint no-unused-vars:0 */
+  logger.error({
+    err: err.stack
+  });
+  res.status(err.statusCode);
+  res.send({
+    error: err.message || 'Unexpected error'
+  });
+});
+
 app.listen(app.get('port'), () => {
   logger.info(`Demo app is listening on ${address()}:${app.get('port')} env=${env}`); // jscs:disable
 });
