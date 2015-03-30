@@ -8,7 +8,6 @@ var path = require('path');
 new WebpackDevServer(webpack(webpackConfig), {
   publicPath: webpackConfig.output.publicPath,
   hot: true,
-  quiet: true,
   stats: {
     colors: true
   },

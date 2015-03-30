@@ -5,6 +5,9 @@ const env = process.env.NODE_ENV || 'development';
 import http from 'http';
 import path from 'path';
 import cors from 'cors';
+import React from 'react';
+import Router from 'react-router';
+import routes from '../shared/routes';
 import address from 'network-address';
 import api from './api';
 import logger from './logger';
@@ -28,10 +31,16 @@ if (app.get('env') === 'production') {
 app.use('/api', api);
 
 // react-router will take care of the rest
-app.use('*', (req, res) => {
-  res.render('index', {
-    js: js,
-    css: css
+app.use((req, res) => {
+  Router.run(routes, req.path, function (Handler, state) {
+    let isNotFound = state.routes.some(route => route.name === 'not-found');
+    res.status(isNotFound ? 404 : 200);
+    let appString = React.renderToString(<Handler />);
+    res.render('index', {
+      js: js,
+      css: css,
+      appString: appString
+    });
   });
 });
 
