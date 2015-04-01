@@ -4,10 +4,9 @@ var path = require('path');
 var webpack = require('webpack');
 var StatsPlugin = require('stats-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var rimraf = require('rimraf');
-rimraf.sync('public/build');
 
 module.exports = {
+  devtool: 'source-map',
   entry: [
     './src/client/app.js'
   ],
@@ -35,6 +34,7 @@ module.exports = {
         modules: false
       }
     ),
+    new webpack.optimize.UglifyJsPlugin(),
     new ExtractTextPlugin("main-[hash].min.css")
   ]
 };

@@ -5,8 +5,6 @@ var webpack = require('webpack');
 var address = require('network-address')();
 var hotPort = 3002;
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var rimraf = require('rimraf');
-rimraf.sync('public/build');
 
 module.exports = {
   devtool: 'eval',
@@ -40,5 +38,6 @@ module.exports = {
     new webpack.NoErrorsPlugin(),
     new ExtractTextPlugin("main.css")
   ],
-  _hotPort: hotPort
+  _hotPort: hotPort,
+  _address: address
 };

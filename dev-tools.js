@@ -4,6 +4,7 @@ var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
 var webpackConfig = require('./webpack.config.development.js');
 var path = require('path');
+import logger from './src/server/logger';
 
 new WebpackDevServer(webpack(webpackConfig), {
   publicPath: webpackConfig.output.publicPath,
@@ -16,5 +17,5 @@ new WebpackDevServer(webpack(webpackConfig), {
   if (err) {
     throw err;
   }
-  console.log('webpack dev server listening on %s', webpackConfig._hotPort);
+  logger.info('webpack dev server listening on %s', webpackConfig._hotPort);
 });

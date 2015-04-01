@@ -13,8 +13,10 @@ import api from './api';
 import logger from './logger';
 import app from './app';
 
-let js = 'http://0.0.0.0:3002/build/bundle.js';
-let css = 'http://0.0.0.0:3002/build/main.css';
+const webpackConfigDev = require('../../webpack.config.development');
+
+let js = `http://${webpackConfigDev._address}:${webpackConfigDev._hotPort}/build/bundle.js`; // jscs:disable
+let css = `http://${webpackConfigDev._address}:${webpackConfigDev._hotPort}/build/main.css`; // jscs:disable
 
 if (app.get('env') === 'development') {
   // run webpack dev server
@@ -22,7 +24,7 @@ if (app.get('env') === 'development') {
 }
 
 if (app.get('env') === 'production') {
-  let webpackBuildStats = require('../../public/build/webpackBuildStats');
+  const webpackBuildStats = require('../../public/build/webpackBuildStats');
   js = `/build/bundle-${webpackBuildStats.hash}.min.js`; // jscs:disable
   css = `/build/main-${webpackBuildStats.hash}.min.css`; // jscs:disable
 }
